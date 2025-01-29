@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md">
+            <div class="p-4 border-b">
+                <h1 class="text-xl font-bold">Chat with Users</h1>
+                <p class="text-gray-600">Logged in as {{ request.user.username }}</p>
+            </div>
+            <div class="divide-y">
+                {% for user in users %}
+                <a href="{% url 'room' user.id %}" class="block p-4 hover:bg-gray-50 transition">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                            {{ user.username|make_list|first|upper }}
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">{{ user.username }}</p>
+                            <p class="text-sm text-gray-500">Click to start chatting</p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
